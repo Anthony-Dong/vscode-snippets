@@ -1,0 +1,55 @@
+{
+    "[cpp]": {
+      "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+      "editor.formatOnSave": true,
+    },
+    "terminal.integrated.env.osx": {
+      "CC": "/usr/local/opt/llvm@14/bin/clang",
+      "CXX": "/usr/local/opt/llvm@14/bin/clang++",
+    },
+    "terminal.integrated.env.linux": {
+      "CC": "/usr/bin/clang-14",
+      "CXX": "/usr/bin/clang++-14"
+    },
+    // https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner
+    "code-runner.executorMap": {
+      "cpp": "cd $dir && devtool cpp --config $workspaceRoot/.vscode/cpp_build.yaml  --src $fileName --output output/$fileNameWithoutExt --run",
+      "python": "PYTHONPATH=$workspaceRoot:$workspaceRoot/python python3.9 -u $fullFileName"
+    },
+    "[python]": {
+      "editor.defaultFormatter": "ms-python.black-formatter",
+      "editor.formatOnSave": true,
+    },
+    "python.languageServer": "Pylance",
+    "python.defaultInterpreterPath": "python3.9",
+    "isort.args": [
+      "--profile",
+      "black"
+    ],
+  
+    "clangd.path": "/Users/bytedance/software/clangd_18.1.3/bin/clangd",
+    "editor.semanticHighlighting.enabled": true,
+    // https://github.com/clangd/vscode-clangd/blob/master/package.json
+    "clangd.arguments": [
+      "--completion-style=detailed",
+      "--background-index",
+      "--clang-tidy", // enable clang-tidy
+      "-j=1", // workers num: 1
+      "--pch-storage=disk", // Storing PCHs in memory increases memory usages, but may improve performance
+      "--pretty"
+    ],
+    "clangd.fallbackFlags": [
+      "-DFMT_HEADER_ONLY",
+      "-std=c++20",
+      "-stdlib=libc++",
+      "-pthread",
+      "-Wall",
+      "-I/usr/local/include",
+    ],
+    "clangd.onConfigChanged": "restart",
+    "python.testing.pytestArgs": [
+      "python"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+  }
